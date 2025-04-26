@@ -4,3 +4,5 @@
 {{ object.last_name }}
 
 <p>Date: {{ now }}</p>
+
+<a href="{% url 'person_update_cbv' object.id %}">Update</a>
