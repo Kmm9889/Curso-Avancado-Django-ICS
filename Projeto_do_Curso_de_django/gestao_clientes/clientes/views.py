@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Person
 from .forms import PersonForm
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.utils import timezone
+
 
 
 @login_required
@@ -45,3 +48,12 @@ def persons_delete(request, id):
 
 class PersonList(ListView):
     model = Person
+
+
+class PersonDetail(DetailView):
+    model = Person
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["now"] = timezone.now()
+        return context
