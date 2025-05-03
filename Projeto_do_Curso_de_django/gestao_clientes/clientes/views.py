@@ -5,7 +5,7 @@ from .forms import PersonForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.utils import timezone
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
@@ -68,4 +68,8 @@ class PersonCreate(CreateView):
 class PersonUpdate(UpdateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
+    success_url = reverse_lazy("person_list_cbv")
+
+class PersonDelete(DeleteView):
+    model = Person
     success_url = reverse_lazy("person_list_cbv")
