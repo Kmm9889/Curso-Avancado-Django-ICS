@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load filters %}
 
 
 {% block title %} Administracao {% endblock %}
@@ -21,6 +22,8 @@
                         </a>
                     </li>
 
+                {% empty %}
+                    <li>Desculpe, não existem clientes cadastrados</li>
                 {% endfor %}
             </ul>
 
@@ -44,6 +47,22 @@
             {% endif %}
         </div>
     </div>
+
+{% filter force_escape|lower %}
+    This text will be HTML-escaped, and will appear in all lowercase.
+{% endfilter %}
+
+{% if persons|length >= 2 %}
+    you have lots of messages today!
+{% endif %}
+
+{% now "jS F Y H:i "%}
+
+{{ footer_message|my_filter }}
+
+{{ 123.3445|arredonda:2 }}
+
+
 
 
 {% endblock %}
