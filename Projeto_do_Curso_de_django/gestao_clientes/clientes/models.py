@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Documento(models.Model): #Aula 22 - Esmiucando os models dentro do terminal
+class Documento(models.Model):
     num_doc = models.CharField(max_length=50)
 
     def __str__(self):
