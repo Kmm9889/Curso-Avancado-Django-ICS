@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Person, Produto
+from .models import Person, Produto, Venda
 from .forms import PersonForm
 from django.views.generic import View
 from django.views.generic.list import ListView
@@ -57,9 +57,15 @@ class PersonList(ListView):
 class PersonDetail(DetailView):
     model = Person
 
+    def get_object(self, queryset = None):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        return Person.objects.select_related('doc').get(id=pk)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["now"] = timezone.now()
+        context["vendas"] = Venda.objects.filter(
+            pessoa_id=self.object.id)
         return context
     
 class PersonCreate(CreateView):
