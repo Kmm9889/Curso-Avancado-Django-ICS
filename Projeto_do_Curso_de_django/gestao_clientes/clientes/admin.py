@@ -23,8 +23,11 @@ class PersonAdmin(admin.ModelAdmin):
     tem_foto.short_description = 'Possui foto'
 
 class VendaAdmin(admin.ModelAdmin):
+    readonly_fields = ('desconto',)
+    raw_id_fields = ('pessoa',)
     list_filter = ('pessoa__doc', 'desconto')
     list_display = ('id', 'pessoa', 'get_total')
+    search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
 
     def total(self, obj):
         return obj.get_total()
