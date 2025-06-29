@@ -23,7 +23,7 @@ class PersonAdmin(admin.ModelAdmin):
     tem_foto.short_description = 'Possui foto'
 
 class VendaAdmin(admin.ModelAdmin):
-    readonly_fields = ('desconto',)
+    readonly_fields = ('valor',)
     raw_id_fields = ('pessoa',)
     list_filter = ('pessoa__doc', 'desconto')
     list_display = ('id', 'pessoa', 'get_total')
