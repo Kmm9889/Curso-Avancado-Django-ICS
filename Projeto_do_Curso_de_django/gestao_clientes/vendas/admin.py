@@ -1,8 +1,12 @@
 from django.contrib import admin
 from .models import Venda
-from .models import ItensDoPedido
+from .models import ItemDoPedido
 from .actions import nfe_emitida, nfe_nao_emitida
 
+
+class ItemPedidoInline(admin.TabularInline):  
+    model = ItemDoPedido
+    extra = 1
 
 class VendaAdmin(admin.ModelAdmin):
     readonly_fields = ('valor',)
@@ -11,6 +15,7 @@ class VendaAdmin(admin.ModelAdmin):
     list_display = ('id', 'pessoa', 'nfe_emitida')
     search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
     actions = [nfe_emitida, nfe_nao_emitida]
+    inlines = [ItemPedidoInline]
     #filter_horizontal = ['produtos']
 
     def total(self, obj):
@@ -20,4 +25,4 @@ class VendaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Venda, VendaAdmin)
-admin.site.register(ItensDoPedido)
+admin.site.register(ItemDoPedido)
