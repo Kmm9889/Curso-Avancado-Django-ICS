@@ -8,7 +8,7 @@ from produtos.models import Produto
 # Create your models here.
 class Venda(models.Model):
     numero = models.CharField(max_length=7)
-    valor = models.DecimalField(max_digits=5, decimal_places=2)
+    valor = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     desconto = models.DecimalField(max_digits=5, decimal_places=2)
     impostos = models.DecimalField(max_digits=5, decimal_places=2)
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
@@ -25,7 +25,7 @@ class Venda(models.Model):
         return self.numero
     
 
-class ItensDoPedido(models.Model):
+class ItemDoPedido(models.Model):
     venda = models.ForeignKey(Venda, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.FloatField()
