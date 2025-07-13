@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Person, Documento, Venda, Produto
+from .models import Person, Documento, Venda
 from .actions import nfe_emitida, nfe_nao_emitida
+from .models import ItensDoPedido
 
 class PersonAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -27,9 +28,9 @@ class PersonAdmin(admin.ModelAdmin):
 
 class VendaAdmin(admin.ModelAdmin):
     readonly_fields = ('valor',)
-    autocomplete_fields = ('pessoa', 'produtos',)   #raw_id_fields = ('pessoa',)
+    autocomplete_fields = ('pessoa',)   #raw_id_fields = ('pessoa',)
     list_filter = ('pessoa__doc', 'desconto')
-    list_display = ('id', 'pessoa', 'get_total', 'nfe_emitida')
+    list_display = ('id', 'pessoa', 'nfe_emitida')
     search_fields = ('id', 'pessoa__first_name', 'pessoa__doc__num_doc')
     actions = [nfe_emitida, nfe_nao_emitida]
     #filter_horizontal = ['produtos']
@@ -39,14 +40,10 @@ class VendaAdmin(admin.ModelAdmin):
     
     total.short_description = 'Total'
 
-class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'descricao', 'preco')
-    search_fields = ('id', 'descricao')
-
 class DocumentoAdmin(admin.ModelAdmin):
     search_fields = ['num_doc']
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento, DocumentoAdmin)
 admin.site.register(Venda, VendaAdmin)
-admin.site.register(Produto, ProdutoAdmin)
+admin.site.register(ItensDoPedido)
