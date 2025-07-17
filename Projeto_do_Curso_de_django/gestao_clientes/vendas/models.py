@@ -19,7 +19,7 @@ class Venda(models.Model):
     def calcular_total(self):
         tot = self.itemdopedido_set.all().aggregate(
             tot_ped=Sum((F('quantidade') * F('produto__preco')) - F('desconto'), output_field=FloatField())
-        )['tot_ped']
+        )['tot_ped'] or 0
 
         tot = tot - float(self.impostos) - float(self.desconto)
         self.valor = tot
