@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from  django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 @login_required
@@ -56,11 +57,11 @@ def persons_delete(request, id):
 
     return render(request, 'person_delete_confirm.html', {'person': person})
 
-class PersonList(ListView):
+class PersonList(LoginRequiredMixin, ListView):
     model = Person
 
 
-class PersonDetail(DetailView):
+class PersonDetail(LoginRequiredMixin, DetailView):
     model = Person
 
     def get_object(self, queryset = None):
@@ -74,17 +75,19 @@ class PersonDetail(DetailView):
             pessoa_id=self.object.id)
         return context
     
-class PersonCreate(CreateView):
+class PersonCreate(LoginRequiredMixin, CreateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url = '/clientes/person_list'
 
-class PersonUpdate(UpdateView):
+class PersonUpdate(LoginRequiredMixin, UpdateView):
     model = Person
     fields = ['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url = reverse_lazy("person_list_cbv")
 
-class PersonDelete(DeleteView):
+class PersonDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = ('clientes.deletar_clientes')
+
     model = Person
     # success_url = reverse_lazy("person_list_cbv")
 
