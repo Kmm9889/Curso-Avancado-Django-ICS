@@ -159,6 +159,6 @@ STATIC_URL = '/static/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'moraiskaique06@gmail.com'
-EMAIL_HOST_PASSWORD = '98896091Km!'
+EMAIL_HOST_USER = 'moraiskaique@gmail.com'
+EMAIL_HOST_PASSWORD = '988960!'
 EMAIL_USE_TLS = True
