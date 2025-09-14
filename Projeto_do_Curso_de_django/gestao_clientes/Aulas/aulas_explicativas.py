@@ -3,3 +3,4 @@
 #as aulas 50 e 51 estão invertidas
 #Aula 53 - Finalizando o uso de Mixins
 #Aula 56 - Introdução a cookies, seções e LocalStorage
+#aula 59 - Introdução ao conceito de Middlewares
