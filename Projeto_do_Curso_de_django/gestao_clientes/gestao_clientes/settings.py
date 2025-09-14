@@ -158,8 +158,10 @@ STATIC_URL = '/static/'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'REMOVIDO'
-EMAIL_PORT = REMOVIDO
-EMAIL_HOST_USER = 'moraiskaique@gmail.com'
-EMAIL_HOST_PASSWORD = 'REMOVIDO'
 EMAIL_USE_TLS = True
+EMAIL_PORT = REMOVIDO
+EMAIL_HOST_USER = 'REMOVIDO' #quando eu quiser é so colocar o meu email
+EMAIL_HOST_PASSWORD = 'REMOVIDO'  #quando eu quiser é so colocar a senha
+

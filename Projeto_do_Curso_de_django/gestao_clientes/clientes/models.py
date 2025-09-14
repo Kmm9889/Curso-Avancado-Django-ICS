@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import send_mail
 
 class Documento(models.Model):
     num_doc = models.CharField(max_length=50)
@@ -24,6 +25,17 @@ class Person(models.Model):
     @property
     def nome_completo(self):
         return self.first_name + ' ' + self.last_name
+    
+    def save(self, *args, **kwargs):
+        super(Person, self).save(*args, **kwargs)
+
+        send_mail(
+            "Novo cliente cadastrado",
+            "o cliente %s foi cadastrado" % self.first_name,
+            "REMOVIDO@gmail.com",  #quando eu quiser é so colocar o meu email
+            ["REMOVIDO@gmail.com"],  #quando eu quiser é so colocar o meu email
+            fail_silently=False,
+        )
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
