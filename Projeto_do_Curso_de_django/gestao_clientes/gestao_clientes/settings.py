@@ -162,6 +162,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'REMOVIDO'
 EMAIL_USE_TLS = True
 EMAIL_PORT = REMOVIDO
-EMAIL_HOST_USER = 'REMOVIDO' #quando eu quiser é so colocar o meu email
-EMAIL_HOST_PASSWORD = 'REMOVIDO'  #quando eu quiser é so colocar a senha
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 

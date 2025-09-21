@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 class Documento(models.Model):
     num_doc = models.CharField(max_length=50)
@@ -29,13 +30,18 @@ class Person(models.Model):
     def save(self, *args, **kwargs):
         super(Person, self).save(*args, **kwargs)
 
+        data = {'cliente': self.first_name}
+        plain_text = render_to_string('clientes/emails/novo_cliente.txt', data)
+        html_email = render_to_string('clientes/emails/novo_cliente.html', data)
         send_mail(
-            "Novo cliente cadastrado",
-            "o cliente %s foi cadastrado" % self.first_name,
-            "REMOVIDO@gmail.com",  #quando eu quiser é so colocar o meu email
-            ["REMOVIDO@gmail.com"],  #quando eu quiser é so colocar o meu email
-            fail_silently=False,
+            "Novo cliente cadastrado",     
+            plain_text,                   
+            "REMOVIDO",     #quando eu quiser é so colocar o meu email     
+            ["REMOVIDO"],   #quando eu quiser é so colocar o meu email     
+            fail_silently=False,          
+            html_message=html_email        
         )
+
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
