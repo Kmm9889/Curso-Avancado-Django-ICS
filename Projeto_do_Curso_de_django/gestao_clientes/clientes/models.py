@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.conf import settings
 
 class Documento(models.Model):
     num_doc = models.CharField(max_length=50)
@@ -36,8 +37,8 @@ class Person(models.Model):
         send_mail(
             "Novo cliente cadastrado",     
             plain_text,                   
-            "REMOVIDO",     #quando eu quiser é so colocar o meu email     
-            ["REMOVIDO"],   #quando eu quiser é so colocar o meu email     
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.ADMIN_EMAIL],
             fail_silently=False,          
             html_message=html_email        
         )
