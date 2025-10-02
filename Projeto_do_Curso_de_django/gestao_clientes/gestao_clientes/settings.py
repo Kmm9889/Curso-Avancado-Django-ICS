@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['gestao-clientes2.herokuapp.com', '127.0.0.1']
 
 INTERNAL_IPS = ["127.0.0.1",]
 
+ADMIN_EMAIL = config('ADMIN_EMAIL')
+ADMINS = [('Kaique', ADMIN_EMAIL)]
 # Application definition
 
 INSTALLED_APPS = [
@@ -166,5 +168,5 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-ADMIN_EMAIL = config('ADMIN_EMAIL')
+SERVER_EMAIL = config('SERVER_EMAIL')
 
