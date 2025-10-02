@@ -4,3 +4,4 @@
 #Aula 53 - Finalizando o uso de Mixins
 #Aula 56 - Introdução a cookies, seções e LocalStorage
 #aula 59 - Introdução ao conceito de Middlewares
+#Aula 65 - Considerações finais sobre o envio de emails com o Django
