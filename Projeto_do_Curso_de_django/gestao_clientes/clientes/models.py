@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.mail import send_mail, mail_admins
+from django.core.mail import send_mail, mail_admins, send_mass_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
@@ -49,6 +49,22 @@ class Person(models.Model):
             fail_silently=False,          
             html_message=html_email  
         )
+
+
+        message1 = (
+            "Subject here",
+            "Here is the message",
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.DEFAULT_FROM_EMAIL],
+        )
+        message2 = (
+           "Another Subject",
+           "Here is another message",
+           settings.DEFAULT_FROM_EMAIL,
+           [settings.DEFAULT_FROM_EMAIL],
+        )
+        send_mass_mail((message1, message2), fail_silently=False)
+        
 
 
     def __str__(self):
