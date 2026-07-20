@@ -19,3 +19,10 @@ class DashboardView(View):
         data['n_ped_nfe'] = Venda.objects.num_ped_nefe()
 
         return render(request, 'vendas/dashboard.html', data)
+    
+class NovoPedido(View):
+    def get(self, request):
+        return render(request, 'vendas/novo-pedido.html')
+    
+    def post(self, request):
+        return render(request, 'vendas/novo-pedido.html')
