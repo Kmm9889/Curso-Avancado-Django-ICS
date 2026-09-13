@@ -11,9 +11,9 @@ from .managers import VendaManager
 # Create your models here.
 class Venda(models.Model):
     numero = models.CharField(max_length=7)
-    valor = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    desconto = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    impostos = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    valor = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    desconto = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    impostos = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     nfe_emitida = models.BooleanField(default=False)
 
