@@ -68,3 +68,8 @@ class NovoItemPedido(View):
         data['itens'] = item.venda.itemdopedido_set.all()
 
         return render(request, 'vendas/novo-pedido.html', data)
+
+class ListaVendas(View):
+    def get(self, request):
+        vendas = Venda.objects.all()
+        return render(request, 'vendas/lista-vendas.html', {'vendas': vendas})
